@@ -1,0 +1,39 @@
+<table class="table table-striped table-hover">
+  <tr *ngFor="let shoe of shoes | async">
+    <td>
+      {{shoe.id}}
+    </td>
+
+    <td>
+      {{shoe.model}}
+    </td>
+
+    <td>
+      {{shoe.size}}
+    </td>
+
+    <td>
+      <table>
+        <tr *ngFor="let shoesCollection of shoe.shoesCollections">
+          <td>
+            {{shoesCollection.name}} {{shoesCollection.season}}
+          </td>
+        </tr>
+      </table>
+    </td>
+
+    <td>
+      <button class="btn btn-default" [routerLink]="['shoes', shoe.id]">Show</button>
+    </td>
+
+    <td>
+      <button class="btn btn-default" [routerLink]="['shoes', shoe.id, 'edit']">Edit</button>
+    </td>
+
+    <td>
+      <button class="btn btn-danger" (click)="remove(shoe)">Remove</button>
+    </td>
+  </tr>
+</table>
+
+<button class="btn btn-primary" routerLink="shoes/new">New shoe</button>

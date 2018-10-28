@@ -1,0 +1,20 @@
+<form #shoeForm="ngForm" *ngIf="shoesCollection">
+  <table class="table table-striped">
+    <tr>
+      <td>Name:</td>
+      <td>
+        <input type="text" name="title" class="form-control" [(ngModel)]="shoesCollection.name">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Season:</td>
+      <td>
+        <input type="text" name="size" class="form-control" [(ngModel)]="shoesCollection.season">
+      </td>
+    </tr>
+  </table>
+
+  <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+  <button type="button" class="btn btn-default" routerLink="/shoes-colections">Return</button>
+</form>

@@ -1,0 +1,25 @@
+<table class="table table-striped table-hover">
+  <tr *ngFor="let shoesCollection of shoesCollections | async">
+    <td>
+      {{shoesCollection.id}}
+    </td>
+
+    <td>
+      {{shoesCollection.name}}
+    </td>
+
+    <td>
+      {{shoesCollection.season}}
+    </td>
+
+    <td>
+      <button class="btn btn-default" [routerLink]="[shoesCollection.id, 'edit']">Edit</button>
+    </td>
+
+    <td>
+      <button class="btn btn-danger" (click)="remove(shoesCollection)">Remove</button>
+    </td>
+  </tr>
+</table>
+
+<button class="btn btn-primary" routerLink="new">New shoes collection</button>

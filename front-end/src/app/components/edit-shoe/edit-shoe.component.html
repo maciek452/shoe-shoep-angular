@@ -1,0 +1,33 @@
+<form #shoeForm="ngForm" *ngIf="shoe">
+  <table class="table table-striped">
+    <tr>
+      <td>Model:</td>
+      <td>
+        <input type="text" name="title" class="form-control" [(ngModel)]="shoe.model">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Size:</td>
+      <td>
+        <input type="number" name="size" class="form-control" [(ngModel)]="shoe.size">
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Collections:
+      </td>
+      <td>
+        <select [(ngModel)]="shoe.shoesCollections" name="shoesCollections" multiple class="form-control" [compareWith]="compareShoesCollections">
+          <option *ngFor="let shoesCollection of avaibleShoesCollections" [ngValue]="shoesCollection">
+            {{shoesCollection.name}} {{shoesCollection.season}}
+          </option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+  <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+  <button type="button" class="btn btn-default" routerLink="/">Return</button>
+</form>
