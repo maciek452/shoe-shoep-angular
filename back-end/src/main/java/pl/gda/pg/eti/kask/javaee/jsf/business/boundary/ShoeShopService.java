@@ -68,14 +68,7 @@ public class ShoeShopService implements Serializable {
   }
 
   public void removeShoesCollection(ShoesCollection shoesCollection) {
-    for (Shoe shoe : shoes.values()) {
-      for (ShoesCollection shoesCollection1 : shoe.getShoesCollections()) {
-        if (shoesCollection1.equals(shoesCollection)) {
-          shoe.removeCollection(shoesCollection);
-        }
-      }
-    }
-
+    shoes.values().stream().forEach(shoe -> shoe.removeCollection(shoesCollection));
     shoesCollectons.remove(shoesCollection.getId());
   }
 
