@@ -15,8 +15,12 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
 @Priority(Priorities.ENTITY_CODER)
 public class ContentTypeFilter implements ContainerResponseFilter {
 
-    @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        responseContext.getHeaders().putSingle(CONTENT_TYPE, APPLICATION_JSON_TYPE.withCharset("utf-8").toString());
-    }
+  @Override
+  public void filter(
+      ContainerRequestContext requestContext, ContainerResponseContext responseContext)
+      throws IOException {
+    responseContext
+        .getHeaders()
+        .putSingle(CONTENT_TYPE, APPLICATION_JSON_TYPE.withCharset("utf-8").toString());
+  }
 }

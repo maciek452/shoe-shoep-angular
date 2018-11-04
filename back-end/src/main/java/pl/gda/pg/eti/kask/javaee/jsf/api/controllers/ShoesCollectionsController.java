@@ -1,7 +1,6 @@
-package pl.gda.pg.eti.kask.javaee.jsf.api;
+package pl.gda.pg.eti.kask.javaee.jsf.api.controllers;
 
 import pl.gda.pg.eti.kask.javaee.jsf.business.boundary.ShoeShopService;
-import pl.gda.pg.eti.kask.javaee.jsf.business.entities.Shoe;
 import pl.gda.pg.eti.kask.javaee.jsf.business.entities.ShoesCollection;
 
 import javax.inject.Inject;
@@ -52,7 +51,7 @@ public class ShoesCollectionsController {
     if (!originalShoesCollection.getId().equals(updatedShoesCollection.getId())) {
       return status(Response.Status.BAD_REQUEST).build();
     }
-    shoeShopService.removeShoesCollection(updatedShoesCollection);
+    shoeShopService.saveShoesCollection(updatedShoesCollection);
     return ok().build();
   }
 }

@@ -8,7 +8,7 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class ShoesCollectionConverter extends AbstractEntityConverter<ShoesCollection> {
 
-    public ShoesCollectionConverter() {
-        super(ShoesCollection.class, ShoesCollection::getId, ShoeShopService::findShoeCollection);
-    }
+  public ShoesCollectionConverter() {
+    super(ShoesCollection.class, ShoesCollection::getId, ShoeShopService::findShoeCollection);
+  }
 }

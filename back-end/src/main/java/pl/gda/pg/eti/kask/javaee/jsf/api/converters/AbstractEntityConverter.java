@@ -47,8 +47,8 @@ public abstract class AbstractEntityConverter<V> implements ParamConverterProvid
             }
 
             @Override
-            public String toString(V book) {
-                return idExtractor.apply(book).toString();
+            public String toString(V entity) {
+                return idExtractor.apply(entity).toString();
             }
         };
     }

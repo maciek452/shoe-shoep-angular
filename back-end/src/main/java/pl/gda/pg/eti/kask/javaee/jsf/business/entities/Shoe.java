@@ -1,11 +1,18 @@
 package pl.gda.pg.eti.kask.javaee.jsf.business.entities;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import pl.gda.pg.eti.kask.javaee.jsf.api.UriUtils;
+import pl.gda.pg.eti.kask.javaee.jsf.api.controllers.ShoesController;
 
+import javax.ws.rs.HttpMethod;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 @EqualsAndHashCode(of = "id")
 @AllArgsConstructor
@@ -14,22 +21,46 @@ import java.util.List;
 @Setter
 public class Shoe implements Serializable {
 
-    private Integer id;
+  private Integer id;
 
-    private String model;
+  private String model;
 
-    private int size;
+  private Brand brand;
 
-    private List<ShoesCollection> shoesCollections = new ArrayList<>();
+  private int size;
 
-    public void removeCollection(ShoesCollection shoesCollection){
-        List<ShoesCollection> shoesCollectionList = new ArrayList<>();
-        for (ShoesCollection shoesCollection1 : shoesCollections) {
-            if(!shoesCollection1.equals(shoesCollection)){
-                shoesCollectionList.add(shoesCollection1);
-            }
-        }
-        this.shoesCollections = shoesCollectionList;
+  @JsonProperty("shoes_collections")
+  private SortedMap<Integer, ShoesCollection> shoesCollections = new TreeMap<>();
+
+  @JsonProperty("_links")
+  private ArrayList<Link> getLinks() {
+    return new ArrayList<>(
+        Arrays.asList(
+            new Link(
+                UriUtils.uri(ShoesController.class, "getShoesBrand", id), HttpMethod.GET, "brand"),
+            new Link(
+                UriUtils.uri(ShoesController.class, "getShoesCollections", id),
+                HttpMethod.GET,
+                "shoes_collections")));
+  }
+
+  @JsonGetter("brand")
+  public URI brand() {
+    return UriUtils.uri(ShoesController.class, "getShoesBrand", id);
+  }
+
+  @JsonGetter("shoes_collections")
+  public URI shoesCollections() {
+    return UriUtils.uri(ShoesController.class, "getShoesCollections", id);
+  }
+
+  public void removeCollection(ShoesCollection shoesCollection) {
+    shoesCollections.remove(shoesCollection.getId());
+  }
+
+  public void updateCollection(ShoesCollection shoesCollection) {
+    if (shoesCollections.values().contains(shoesCollection)) {
+      shoesCollections.put(shoesCollection.getId(), shoesCollection);
     }
-
+  }
 }
